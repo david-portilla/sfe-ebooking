@@ -13,8 +13,6 @@ export interface InputProps extends AriaTextFieldProps {
   description?: string;
   errorMessage?: string;
   className?: string;
-  placeholder?: string;
-  type?: string;
 }
 
 export function Input({
@@ -22,8 +20,6 @@ export function Input({
   description,
   errorMessage,
   className,
-  placeholder,
-  type,
   ...props
 }: InputProps) {
   return (
@@ -31,11 +27,7 @@ export function Input({
       {label && (
         <Label className="text-sm font-medium text-gray-700">{label}</Label>
       )}
-      <AriaInput
-        className="flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-        placeholder={placeholder}
-        type={type}
-      />
+      <AriaInput className="flex h-10 w-full rounded-md border border-gray-300 bg-white px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" />
       {description && (
         <Text slot="description" className="text-xs text-gray-500">
           {description}
