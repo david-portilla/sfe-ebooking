@@ -1,6 +1,80 @@
-# User Management Dashboard
+<div align="center">
+  <h1>User Management Dashboard</h1>
 
-Application to visualize and manage users via a public API, built with **React**, **TypeScript**, **Vite**, and **Tailwind CSS**.
+![CI Status](https://github.com/david-portilla/sfe-ebooking/workflows/CI/badge.svg)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Bun Version](https://img.shields.io/badge/bun-%3E%3D1.0.0-black)
+![React Version](https://img.shields.io/badge/react-19.2-blue)
+
+  <br>
+  <img src=".github/sfe-ebooking.png">
+  <br>
+  <br>
+  <p>Application to visualize and manage users via a public API, built with <strong>React</strong>, <strong>TypeScript</strong>, <strong>Vite</strong>, and <strong>Tailwind CSS</strong>.</p>
+  <p><strong><a href="https://sfe-ebooking.vercel.app/" target="_blank" rel="noopener noreferrer">🚀 Live Demo</a></strong></p>
+  <br>
+</div>
+
+## **📖 Description**
+
+This project is a comprehensive User Management Dashboard designed for efficiency and ease of use. It allows administrators to view, filter, and manage user data retrieved from a public API. Key features include real-time search, detailed user profiles, and a responsive design tailored for all devices.
+
+---
+
+## ⚡ Quick Start
+
+```bash
+# 1. Install Bun (if not installed)
+curl -fsSL https://bun.sh/install | bash
+
+# 2. Clone the repository
+git clone git@github.com:david-portilla/sfe-ebooking.git
+cd sfe-ebooking
+
+# 3. Install dependencies
+bun install
+
+# 4. Start development server
+bun dev
+
+# 5. Open http://localhost:5173 in your browser 🎉
+```
+
+**That's it!** No environment variables needed, no additional setup required.
+
+---
+
+## **🚀 Live Demo**
+
+Check out the live version of the app:
+👉 [sfe-ebooking.vercel.app](https://sfe-ebooking.vercel.app/)
+
+## 📋 Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+### Required
+
+- **Bun** v1.0.0 or higher ([Installation Guide](https://bun.sh/docs/installation))
+
+  ```bash
+  # macOS/Linux
+  curl -fsSL https://bun.sh/install | bash
+
+  # Windows (PowerShell)
+  powershell -c "irm bun.sh/install.ps1 | iex"
+
+  # Verify installation
+  bun --version
+  ```
+
+- **Git** (for cloning the repository)
+
+### Optional
+
+- **Node.js** v18+ (recommended for better IDE compatibility)
+
+---
 
 ## 🚀 Tech Stack
 
@@ -14,70 +88,124 @@ Application to visualize and manage users via a public API, built with **React**
 
 ## 🛠️ Setup & Run
 
-1.  **Install dependencies:**
+### 1. Clone the Repository
 
-    ```bash
-    bun install
-    ```
+```bash
+# HTTPS
+git clone https://github.com/david-portilla/sfe-ebooking.git
 
-2.  **Start development server:**
+# SSH (if you have SSH keys configured)
+git clone git@github.com:david-portilla/sfe-ebooking.git
 
-    ```bash
-    bun dev
-    ```
+cd sfe-ebooking
+```
 
-3.  **Build for production:**
+### 2. Install Dependencies
 
-    ```bash
-    bun run build
-    ```
+```bash
+bun install
+```
 
-4.  **Run Tests:**
-    Important: Do not run `bun test` as it uses Bun's native runner. Use validation scripts:
+### 3. Environment Setup (Optional)
 
-    ```bash
-    bun run test        # Watch mode (Vitest)
-    bun run test:run    # CI mode (Vitest)
-    ```
+This project uses a public API and **doesn't require environment variables**. The API endpoint is hardcoded to:
 
-5.  **Run Quality Checks:**
-    ```bash
-    bun lint            # Run ESLint
-    bun lint:fix        # Fix ESLint errors
-    bun run format      # Format code with Prettier
-    bun run check-format # Check formatting
-    # OR run everything (lint, format, test, build):
-    bun run check-all
-    ```
+```
+https://jsonplaceholder.typicode.com/users
+```
+
+For future configuration needs, you can create a `.env` file:
+
+```bash
+# No .env file needed for basic usage
+# All configuration is optional
+```
+
+### 4. Start Development Server
+
+```bash
+bun dev
+```
+
+The app will be available at [http://localhost:5173](http://localhost:5173)
+
+### 5. Build for Production
+
+```bash
+bun run build
+```
+
+### 6. Preview Production Build
+
+```bash
+bun run preview
+```
+
+---
+
+## 📜 Available Scripts
+
+| Command                | Description                                | When to Use        |
+| ---------------------- | ------------------------------------------ | ------------------ |
+| `bun dev`              | Start dev server (port 5173)               | Daily development  |
+| `bun run build`        | Production build                           | Before deployment  |
+| `bun run preview`      | Preview production build                   | Test build locally |
+| `bun run test`         | Run tests in watch mode                    | TDD workflow       |
+| `bun run test:run`     | Run tests once (CI mode)                   | Pre-commit checks  |
+| `bun run lint`         | Check for linting errors                   | Before committing  |
+| `bun run lint:fix`     | Auto-fix linting errors                    | Clean up code      |
+| `bun run format`       | Format code with Prettier                  | Manual formatting  |
+| `bun run check-format` | Check if code is formatted                 | CI pipeline        |
+| `bun run check-all`    | Run all checks (lint, format, test, build) | **Before pushing** |
+| `bun run prepare`      | Install Husky git hooks                    | After fresh clone  |
+
+**💡 Pro tip**: Run `bun run check-all` before committing to catch issues early!
 
 ## 📁 Project Structure
 
 ```
-src/
-├── app/                    # Application configuration
-│   ├── provider.tsx        # Root providers (QueryClient, etc.)
-│   └── router.tsx          # React Router configuration
-├── components/
-│   └── ui/                 # Reusable UI components (React Aria)
-│       ├── button.tsx      # Button component with variants
-│       ├── input.tsx       # Input component with validation
-│       ├── card.tsx        # Card container component
-│       └── layout.tsx      # Layout utilities
-├── features/               # Feature-based modules
-│   └── users/              # Users feature
-│       ├── api.ts          # API calls & error handling
-│       ├── api.test.ts     # API unit tests
-│       ├── types.ts        # TypeScript interfaces
-│       ├── hooks/          # Custom hooks (useUsers)
-│       └── components/     # Feature components (UserCard, UserGrid)
-├── lib/                    # Shared utilities & config
-│   ├── i18n.ts             # i18next configuration
-│   ├── query-client.ts     # TanStack Query setup
-│   └── utils.ts            # Utility functions (cn, etc.)
-├── pages/                  # Page components
-├── test/                   # Test configuration
-│   └── setup.ts            # Test setup (jest-dom)
-└── main.tsx                # Application entry point
+sfe-ebooking/
+├── .github/
+│   └── workflows/
+│       └── ci.yml              # GitHub Actions CI/CD pipeline
+├── .husky/                     # Git hooks (pre-commit, commit-msg)
+├── src/
+│   ├── app/                    # Application-level setup
+│   │   ├── provider.tsx        # Root providers (QueryClient, Router)
+│   │   └── router.tsx          # Route definitions (React Router v7)
+│   ├── components/
+│   │   └── ui/                 # Reusable, accessible UI components
+│   │       ├── button.tsx      # Button with variants (primary, ghost, etc.)
+│   │       ├── input.tsx       # Input with validation & error states
+│   │       ├── card.tsx        # Card container with hover effects
+│   │       └── layout.tsx      # Layout utilities (Container)
+│   ├── features/               # Feature modules (self-contained)
+│   │   └── users/              # Users feature
+│   │       ├── api.ts          # API calls with error handling
+│   │       ├── api.test.ts     # API unit tests (100% coverage)
+│   │       ├── types.ts        # TypeScript interfaces (User, Address, etc.)
+│   │       ├── hooks/          # Custom hooks (useUsers, useUser)
+│   │       └── components/     # Feature-specific components
+│   ├── lib/                    # Shared utilities & configurations
+│   │   ├── i18n.ts             # i18next setup (en/es support)
+│   │   ├── query-client.ts     # TanStack Query configuration
+│   │   ├── url-utils.ts        # URL sanitization (XSS prevention)
+│   │   └── utils.ts            # Helper functions (cn, clsx)
+│   ├── pages/                  # Page-level components
+│   │   ├── UsersPage.tsx       # User list with search & filters
+│   │   └── UserDetailPage.tsx  # User detail view
+│   ├── test/                   # Test setup & utilities
+│   │   ├── setup.ts            # Vitest setup (jest-dom)
+│   │   └── integration/        # Integration tests
+│   └── main.tsx                # Application entry point
+├── bun.lockb                   # Bun lockfile (DO NOT EDIT MANUALLY)
+├── package.json                # Dependencies & npm scripts
+├── vite.config.ts              # Vite configuration (Vitest setup)
+├── tsconfig.json               # TypeScript configuration (strict mode)
+├── eslint.config.js            # ESLint rules (TypeScript + React)
+├── vercel.json                 # Vercel deployment config (headers, caching)
+├── commitlint.config.js        # Commit message validation rules
+└── CLAUDE.md                   # Project documentation for Claude Code
 ```
 
 ## ✨ Features
@@ -131,3 +259,183 @@ Components support:
 - Focus management
 - ARIA attributes
 - Render props for advanced styling
+
+---
+
+## 🔧 Troubleshooting
+
+### Common Issues
+
+#### ❌ `bun: command not found`
+
+**Solution**: Install Bun first (see [Prerequisites](#-prerequisites) section)
+
+#### ❌ Port 5173 already in use
+
+**Solution**:
+
+```bash
+# Kill the process using port 5173
+lsof -ti:5173 | xargs kill -9
+
+# Or use a different port
+bun dev --port 3000
+```
+
+#### ❌ `Cannot find module` errors
+
+**Solution**: Delete `node_modules` and reinstall
+
+```bash
+rm -rf node_modules bun.lockb
+bun install
+```
+
+#### ❌ Tests failing with "fetch is not defined"
+
+**Solution**: This is expected - use `bun run test` (Vitest), **NOT** `bun test` (Bun's native runner)
+
+```bash
+# ❌ Wrong - uses Bun's test runner
+bun test
+
+# ✅ Correct - uses Vitest
+bun run test
+```
+
+#### ❌ Git hooks not running (Husky)
+
+**Solution**: Reinstall Husky hooks
+
+```bash
+bun run prepare  # Reinstalls git hooks
+```
+
+#### ❌ Commit rejected: "commit message doesn't match format"
+
+**Solution**: Follow the commit message convention:
+
+```bash
+# Format: type(scope): [TICKET-ID] message
+git commit -m "feat(users): [SFE-005] add user search"
+```
+
+Valid types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
+
+#### ❌ `bun install` fails or hangs
+
+**Solution**:
+
+```bash
+# Clear Bun cache
+rm -rf ~/.bun/install/cache
+
+# Try again
+bun install
+```
+
+---
+
+## 🤝 Contributing
+
+We follow a strict Git workflow. Please read these guidelines before contributing:
+
+### Branch Naming Convention
+
+- **Format**: `SFE-XXX-feature-name`
+- **Example**: `SFE-005-user-search`
+
+### Commit Message Format
+
+- **Format**: `type(scope): [TICKET-ID] message`
+- **Example**: `feat(users): [SFE-005] add search filtering`
+- **Enforced by**: commitlint (via Husky commit-msg hook)
+
+**Valid types**:
+
+- `feat` - New feature
+- `fix` - Bug fix
+- `docs` - Documentation changes
+- `style` - Code style changes (formatting, etc.)
+- `refactor` - Code refactoring
+- `test` - Adding or updating tests
+- `chore` - Maintenance tasks
+
+### Git Workflow
+
+1. **Never commit directly to `main`**
+2. Create a feature branch from `main`:
+   ```bash
+   git checkout -b SFE-XXX-your-feature
+   ```
+3. Make your changes with proper commit messages
+4. Run quality checks before pushing:
+   ```bash
+   bun run check-all
+   ```
+5. Push to your branch:
+   ```bash
+   git push origin SFE-XXX-your-feature
+   ```
+6. Open a Pull Request to `main`
+
+### Pre-commit Hooks
+
+Husky will automatically run before each commit:
+
+- ✅ ESLint on staged files
+- ✅ Prettier formatting
+- ✅ Commit message validation
+
+If hooks fail, fix the issues and commit again.
+
+### Testing Requirements
+
+All PRs must include appropriate tests:
+
+- Unit tests for new utility functions
+- Component tests for UI changes
+- Integration tests for user flows
+
+Run tests before submitting:
+
+```bash
+bun run test:run  # Run all tests once
+```
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 👥 Authors
+
+- **David Portilla** - [GitHub](https://github.com/david-portilla)
+
+---
+
+## 🙏 Acknowledgments
+
+- API provided by [JSONPlaceholder](https://jsonplaceholder.typicode.com/)
+- UI components built with [React Aria](https://react-spectrum.adobe.com/react-aria/)
+- Testing utilities from [Testing Library](https://testing-library.com/)
+- Icons from [Lucide React](https://lucide.dev/)
+
+---
+
+## 📞 Support
+
+If you encounter any issues or have questions:
+
+1. Check the [Troubleshooting](#-troubleshooting) section
+2. Search [existing issues](https://github.com/david-portilla/sfe-ebooking/issues)
+3. Open a [new issue](https://github.com/david-portilla/sfe-ebooking/issues/new) with detailed information
+
+---
+
+<div align="center">
+  Made with ❤️ by <a href="https://github.com/david-portilla">David Portilla</a>
+</div>
