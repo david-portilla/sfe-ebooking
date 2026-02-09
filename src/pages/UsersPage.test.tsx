@@ -5,6 +5,11 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { MemoryRouter } from 'react-router-dom';
 import { UsersPage } from './UsersPage';
 
+// Mock useDebounce to return value immediately
+vi.mock('../hooks/useDebounce', () => ({
+  useDebounce: <T,>(value: T) => value,
+}));
+
 // Mock the API
 const fetchMock = vi.fn();
 vi.stubGlobal('fetch', fetchMock);
@@ -167,14 +172,11 @@ describe('UsersPage Integration', () => {
     const input = screen.getByPlaceholderText('Search by name or email...');
     await user.type(input, 'john');
 
-    // Wait for debounce (300ms) + filter
-    await waitFor(
-      () => {
-        expect(screen.getByText('John Doe')).toBeInTheDocument();
-        expect(screen.queryByText('Jane Smith')).not.toBeInTheDocument();
-      },
-      { timeout: 500 },
-    );
+    // Wait for filter (debounce is mocked so it's instant)
+    await waitFor(() => {
+      expect(screen.getByText('John Doe')).toBeInTheDocument();
+      expect(screen.queryByText('Jane Smith')).not.toBeInTheDocument();
+    });
 
     expect(screen.getByText('Bob Johnson')).toBeInTheDocument(); // Bob Johnson also matches
   });
@@ -198,15 +200,12 @@ describe('UsersPage Integration', () => {
     await user.clear(input);
     await user.type(input, 'jane@example');
 
-    // Wait for debounce + filter (increased timeout for debounce delay)
-    await waitFor(
-      () => {
-        expect(screen.getByText('Jane Smith')).toBeInTheDocument();
-        expect(screen.queryByText('John Doe')).not.toBeInTheDocument();
-        expect(screen.queryByText('Bob Johnson')).not.toBeInTheDocument();
-      },
-      { timeout: 1000 },
-    );
+    // Wait for filter (debounce is mocked)
+    await waitFor(() => {
+      expect(screen.getByText('Jane Smith')).toBeInTheDocument();
+      expect(screen.queryByText('John Doe')).not.toBeInTheDocument();
+      expect(screen.queryByText('Bob Johnson')).not.toBeInTheDocument();
+    });
   });
 
   it('shows all users when search is cleared', async () => {
@@ -228,26 +227,20 @@ describe('UsersPage Integration', () => {
     await user.type(input, 'jane');
 
     // Wait for filter to apply
-    await waitFor(
-      () => {
-        expect(screen.queryByText('John Doe')).not.toBeInTheDocument();
-        expect(screen.getByText('Jane Smith')).toBeInTheDocument();
-      },
-      { timeout: 500 },
-    );
+    await waitFor(() => {
+      expect(screen.queryByText('John Doe')).not.toBeInTheDocument();
+      expect(screen.getByText('Jane Smith')).toBeInTheDocument();
+    });
 
     // Clear the search
     await user.clear(input);
 
     // Wait for all users to show again
-    await waitFor(
-      () => {
-        expect(screen.getByText('John Doe')).toBeInTheDocument();
-        expect(screen.getByText('Jane Smith')).toBeInTheDocument();
-        expect(screen.getByText('Bob Johnson')).toBeInTheDocument();
-      },
-      { timeout: 500 },
-    );
+    await waitFor(() => {
+      expect(screen.getByText('John Doe')).toBeInTheDocument();
+      expect(screen.getByText('Jane Smith')).toBeInTheDocument();
+      expect(screen.getByText('Bob Johnson')).toBeInTheDocument();
+    });
   });
 
   it('shows no results message when search has no matches', async () => {
@@ -269,14 +262,11 @@ describe('UsersPage Integration', () => {
     await user.clear(input);
     await user.type(input, 'nonexistent');
 
-    // Wait for filter to apply (increased timeout)
-    await waitFor(
-      () => {
-        expect(screen.getByText('No users found.')).toBeInTheDocument();
-        expect(screen.queryByText('John Doe')).not.toBeInTheDocument();
-        expect(screen.queryByText('Jane Smith')).not.toBeInTheDocument();
-      },
-      { timeout: 1000 },
-    );
+    // Wait for filter to apply
+    await waitFor(() => {
+      expect(screen.getByText('No users found.')).toBeInTheDocument();
+      expect(screen.queryByText('John Doe')).not.toBeInTheDocument();
+      expect(screen.queryByText('Jane Smith')).not.toBeInTheDocument();
+    });
   });
 });

@@ -1,12 +1,16 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { UsersPage } from '../pages/UsersPage';
+import { UserDetailPage } from '../pages/UserDetailPage';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <UsersPage />,
   },
-  // TODO: Add more routes here for detailed user view or settings
+  {
+    path: '/users/:userId',
+    element: <UserDetailPage />,
+  },
 ]);
 
 /**
