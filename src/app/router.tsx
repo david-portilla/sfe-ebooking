@@ -1,14 +1,17 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { ComponentDemo } from '../pages/ComponentDemo';
+import { UsersPage } from '../pages/UsersPage';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <ComponentDemo />,
+    element: <UsersPage />,
   },
-  // We will add more routes here for users feature later
+  // TODO: Add more routes here for detailed user view or settings
 ]);
 
+/**
+ * The main router provider for the application.
+ */
 export function AppRouter() {
   return <RouterProvider router={router} />;
 }

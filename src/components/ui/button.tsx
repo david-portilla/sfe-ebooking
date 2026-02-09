@@ -15,7 +15,13 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
 export interface ButtonProps extends AriaButtonProps {
   variant?: ButtonVariant;
   size?: ButtonSize;
-  className?: string;
+  className?:
+    | string
+    | ((values: {
+        isPressed: boolean;
+        isHovered: boolean;
+        isFocusVisible: boolean;
+      }) => string);
 }
 
 const variants: Record<ButtonVariant, string> = {
@@ -42,12 +48,12 @@ export function Button({
   return (
     <AriaButton
       {...props}
-      className={() =>
+      className={(renderProps) =>
         cn(
           'inline-flex items-center justify-center rounded-md font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none',
           variants[variant],
           sizes[size],
-          className,
+          typeof className === 'function' ? className(renderProps) : className,
         )
       }
     />

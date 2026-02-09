@@ -22,11 +22,5 @@ jobs:
       - name: Install dependencies
         run: bun install
 
-      - name: Lint
-        run: bun lint
-
-      - name: Check Format
-        run: bun run check-format
-
-      - name: Type Check & Build
-        run: bun run build
+      - name: Check-All (Lint, Format, Test, Build)
+        run: bun run check-all
