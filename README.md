@@ -225,7 +225,17 @@ sfe-ebooking/
 - ✅ **Comprehensive error handling** (ApiError class)
 - ✅ **Automated quality checks** (ESLint, Prettier, Husky hooks)
 - ✅ **CI/CD pipeline** via GitHub Actions
-- ✅ **Internationalization** ready (i18next)
+- [x] **Internationalization** ready (i18next)
+
+## 🔮 Future Improvements
+
+While the current version meets all technical requirements, here are some planned enhancements:
+
+- **Pagination**: Implement server-side or client-side pagination to handle larger datasets efficiently.
+- **Dark Mode**: Add a theme toggler to switch between light and dark modes.
+- **User Management**: Implement **Create**, **Update**, and **Delete** actions (CRUD) to fully utilize the API capabilities.
+- **Map Integration**: Replace the static coordinates in the User Detail view with an interactive map (e.g., Leaflet or Google Maps).
+- **Advanced Filtering**: Add filters for company or city to refine user searches further.
 
 ## 🧪 Testing
 
