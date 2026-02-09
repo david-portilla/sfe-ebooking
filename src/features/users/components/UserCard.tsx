@@ -41,11 +41,11 @@ export function UserCard({ user }: UserCardProps) {
           </span>
         </div>
         <div className="flex items-center gap-2">
-          <span role="img" aria-label="Company">
-            🏢
+          <span role="img" aria-label="Location">
+            📍
           </span>
-          <span className="truncate" title={user.company.name}>
-            {user.company.name}
+          <span className="truncate" title={user.address.city}>
+            {user.address.city}
           </span>
         </div>
       </div>

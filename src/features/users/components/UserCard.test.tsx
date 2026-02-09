@@ -79,13 +79,13 @@ describe('UserCard', () => {
     expect(screen.getByText('→')).toBeInTheDocument();
   });
 
-  it('renders company information', () => {
+  it('renders city information', () => {
     render(
       <MemoryRouter>
         <UserCard user={mockUser} />
       </MemoryRouter>,
     );
 
-    expect(screen.getByText('Romaguera-Crona')).toBeInTheDocument();
+    expect(screen.getByText('Gwenborough')).toBeInTheDocument();
   });
 });
