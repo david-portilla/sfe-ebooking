@@ -6,11 +6,11 @@ Application to visualize and manage users via a public API, built with **React**
 
 - **Runtime**: [Bun](https://bun.sh)
 - **Framework**: [React](https://react.dev) + [Vite](https://vitejs.dev)
-- **Styling**: [Tailwind CSS v4](https://tailwindcss.com)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com) & [React Aria](https://react-spectrum.adobe.com/react-aria/index.html)
 - **State Management**: [TanStack Query](https://tanstack.com/query) (Server State)
 - **Routing**: [React Router v7](https://reactrouter.com)
 - **I18n**: [i18next](https://www.i18next.com)
-- **Quality**: ESLint, Prettier, Husky, Commitlint
+- **Quality**: ESLint, Prettier, Husky, Commitlint, Vitest
 
 ## 🛠️ Setup & Run
 
@@ -32,7 +32,18 @@ Application to visualize and manage users via a public API, built with **React**
     bun run build
     ```
 
-4.  **Run Linting:**
+4.  **Run Tests:**
+    Important: Do not run `bun test` as it uses Bun's native runner. Use validation scripts:
+
+    ```bash
+    bun run test        # Watch mode (Vitest)
+    bun run test:run    # CI mode (Vitest)
+    ```
+
+5.  **Run Quality Checks:**
     ```bash
     bun lint
+    bun run check-format
+    # OR run everything (lint, format, test, build):
+    bun run check-all
     ```

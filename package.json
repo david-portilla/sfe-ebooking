@@ -10,6 +10,9 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "check-format": "prettier --check .",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "check-all": "bun lint:fix && bun run format && bun run check-format && bun run test:run && bun run build",
     "preview": "vite preview",
     "prepare": "husky"
   },
@@ -24,18 +27,23 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.90.20",
+    "clsx": "^2.1.1",
     "i18next": "^25.8.4",
     "i18next-browser-languagedetector": "^8.2.0",
     "react": "^19.2.0",
+    "react-aria-components": "^1.15.1",
     "react-dom": "^19.2.0",
     "react-i18next": "^16.5.4",
-    "react-router-dom": "^7.13.0"
+    "react-router-dom": "^7.13.0",
+    "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.4.1",
     "@commitlint/config-conventional": "^20.4.1",
     "@eslint/js": "^10.0.1",
     "@tailwindcss/vite": "^4.1.18",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
@@ -48,12 +56,14 @@
     "eslint-plugin-react-refresh": "^0.5.0",
     "globals": "^17.3.0",
     "husky": "^9.1.7",
+    "jsdom": "^28.0.0",
     "lint-staged": "^16.2.7",
     "postcss": "^8.5.6",
     "prettier": "^3.8.1",
     "tailwindcss": "^4.1.18",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.54.0",
-    "vite": "^7.3.1"
+    "vite": "^7.3.1",
+    "vitest": "^4.0.18"
   }
 }
