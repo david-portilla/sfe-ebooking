@@ -1,14 +1,33 @@
-import { useUsers } from '../features/users/hooks/useUsers';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { useFilteredUsers } from '../features/users/hooks/useFilteredUsers';
 import { UserGrid } from '../features/users/components/UserGrid';
+import { UserFilters } from '../features/users/components/UserFilters';
 import { Container } from '../components/ui/layout';
+import { useDebounce } from '../hooks/useDebounce';
 
 /**
  * The main page component for displaying the users list.
- * Handles loading, error, and success states.
+ * Handles loading, error, success states, and filtering.
  * @returns {JSX.Element} The rendered page.
  */
 export function UsersPage() {
-  const { data: users, isLoading, isError, error } = useUsers();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const initialSearch = searchParams.get('search') || '';
+  const [search, setSearch] = useState(initialSearch);
+  const debouncedSearch = useDebounce(search, 300);
+
+  const { users, isLoading, isError, error } =
+    useFilteredUsers(debouncedSearch);
+
+  // Sync search state with URL
+  useEffect(() => {
+    if (debouncedSearch) {
+      setSearchParams({ search: debouncedSearch });
+    } else {
+      setSearchParams({});
+    }
+  }, [debouncedSearch, setSearchParams]);
 
   if (isLoading) {
     return (
@@ -42,7 +61,9 @@ export function UsersPage() {
         </p>
       </div>
 
-      {users && <UserGrid users={users} />}
+      <UserFilters search={search} onSearchChange={setSearch} />
+
+      <UserGrid users={users} />
     </Container>
   );
 }
