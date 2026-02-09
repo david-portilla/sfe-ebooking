@@ -237,6 +237,16 @@ While the current version meets all technical requirements, here are some planne
 - **Map Integration**: Replace the static coordinates in the User Detail view with an interactive map (e.g., Leaflet or Google Maps).
 - **Advanced Filtering**: Add filters for company or city to refine user searches further.
 
+### 🏗️ Technical Debt & Performance Roadmap
+
+This section outlines known optimizations and reliability improvements planned for the next iteration to ensure scalability:
+
+- **🎯 Performance Monitoring**: Integrate Web Vitals tracking and Sentry for real-time error monitoring.
+- **⚡ Code Splitting**: Implement lazy loading for routes and heavy components to optimize initial load time.
+- **🛡️ Error Boundaries**: Add granular React Error Boundaries to prevent full app crashes.
+- **🤖 E2E Testing**: Add Playwright or Cypress for complete end-to-end user flow validation.
+- **🌍 Full Internationalization**: Complete i18n support for all user-facing text.
+
 ## 🧪 Testing
 
 The project uses **Vitest** with **React Testing Library**:
