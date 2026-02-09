@@ -45,3 +45,30 @@ export async function fetchUsers(): Promise<User[]> {
     );
   }
 }
+
+/**
+ * Fetches a single user by ID.
+ * @param {string} id - The user ID.
+ * @returns {Promise<User>} A promise that resolves to the user.
+ * @throws {ApiError} If the response is not ok.
+ */
+export async function fetchUser(id: string): Promise<User> {
+  try {
+    const response = await fetch(`${API_URL}/${id}`);
+
+    if (!response.ok) {
+      throw new ApiError(
+        response.status,
+        `Failed to fetch user: ${response.statusText}`,
+      );
+    }
+
+    return await response.json();
+  } catch (error) {
+    if (error instanceof ApiError) throw error;
+    throw new ApiError(
+      0,
+      `Network error: ${error instanceof Error ? error.message : 'Unknown error'}`,
+    );
+  }
+}
