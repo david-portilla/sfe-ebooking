@@ -3,6 +3,7 @@ import { useUser } from '../features/users/hooks/useUser';
 import { Container } from '../components/ui/layout';
 import { Card } from '../components/ui/card';
 import { Button } from '../components/ui/button';
+import { sanitizeUrl } from '../lib/url-utils';
 
 /**
  * Page component to display detailed information about a user.
@@ -45,10 +46,11 @@ export function UserDetailPage() {
   return (
     <Container className="py-10">
       <div className="mb-6">
-        <Link to="/">
-          <Button variant="ghost" className="pl-0 gap-2">
-            ← Back to Users
-          </Button>
+        <Link
+          to="/"
+          className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 px-4 py-2 pl-0 gap-2"
+        >
+          ← Back to Users
         </Link>
       </div>
 
@@ -78,14 +80,21 @@ export function UserDetailPage() {
               </div>
               <div>
                 <h3 className="text-sm font-medium text-gray-500">Website</h3>
-                <a
-                  href={`https://${user.website}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 hover:underline"
-                >
-                  {user.website}
-                </a>
+                {(() => {
+                  const safeUrl = sanitizeUrl(user.website);
+                  return safeUrl ? (
+                    <a
+                      href={safeUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:underline"
+                    >
+                      {user.website}
+                    </a>
+                  ) : (
+                    <span className="text-gray-900">{user.website}</span>
+                  );
+                })()}
               </div>
             </div>
           </Card>

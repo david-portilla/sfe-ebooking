@@ -22,12 +22,18 @@ export function UsersPage() {
 
   // Sync search state with URL
   useEffect(() => {
-    if (debouncedSearch) {
-      setSearchParams({ search: debouncedSearch });
-    } else {
-      setSearchParams({});
+    const currentSearch = searchParams.get('search') || '';
+    const newSearch = debouncedSearch.trim();
+
+    // Only update URL if the value actually changed
+    if (currentSearch !== newSearch) {
+      if (newSearch) {
+        setSearchParams({ search: newSearch }, { replace: true });
+      } else {
+        setSearchParams({}, { replace: true });
+      }
     }
-  }, [debouncedSearch, setSearchParams]);
+  }, [debouncedSearch, searchParams, setSearchParams]);
 
   if (isLoading) {
     return (
