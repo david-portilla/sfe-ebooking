@@ -237,7 +237,9 @@ While the current version meets all technical requirements, here are some planne
 - **Map Integration**: Replace the static coordinates in the User Detail view with an interactive map (e.g., Leaflet or Google Maps).
 - **Advanced Filtering**: Add filters for company or city to refine user searches further.
 
-### 🏗️ Performance & Reliability
+### 🏗️ Technical Debt & Performance Roadmap
+
+This section outlines known optimizations and reliability improvements planned for the next iteration to ensure scalability:
 
 - **🎯 Performance Monitoring**: Integrate Web Vitals tracking and Sentry for real-time error monitoring.
 - **⚡ Code Splitting**: Implement lazy loading for routes and heavy components to optimize initial load time.
